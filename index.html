@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clima App</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style type="text/tailwindcss">
+        @layer components {
+            .card {
+                @apply bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow;
+            }
+            .btn {
+                @apply bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors;
+            }
+            .input {
+                @apply border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500;
+            }
+            .icon {
+                @apply mr-2 inline-block;
+            }
+            .clima-icon {
+                @apply text-3xl inline-block mr-2;
+            }
+            .clima-icon-sol {
+                @apply text-yellow-500;
+            }
+            .clima-icon-luna {
+                @apply text-blue-300;
+            }
+            .clima-icon-lluvia {
+                @apply text-blue-500;
+            }
+            .clima-icon-nieve {
+                @apply text-blue-200;
+            }
+            .clima-icon-lg {
+                @apply text-4xl block mb-2;
+            }
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center bg-gray-200 min-h-screen w-full">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-10 text-center">
+            <h1 class="text-4xl font-bold text-blue-600 mb-2 animate__animated animate__fadeIn">
+                <i class="fas fa-cloud-sun icon text-yellow-500"></i>Clima App
+            </h1>
+            <p class="text-gray-600 animate__animated animate__fadeIn animate__delay-1s">
+                <i class="fas fa-globe-americas icon text-blue-500"></i>Consulta el clima de cualquier ciudad del mundo
+            </p>
+        </header>
+
+        <div class="max-w-xl mx-auto mb-10 animate__animated animate__fadeIn animate__delay-2s">
+            <div class="flex gap-2">
+                <div class="relative flex-grow">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" id="ciudad" placeholder="Ingresa el nombre de una ciudad" class="input border-gray-500 pl-10 w-full">
+                </div>
+                <button id="buscar" class="btn">
+                    <i class="fas fa-magnifying-glass-location mr-1"></i>Buscar
+                </button>
+            </div>
+        </div>
+
+        <div id="resultado" class="max-w-2xl mx-auto hidden animate__animated">
+            <div class="card">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h2 id="ciudad-nombre" class="text-2xl font-bold text-gray-800">
+                            <i class="fas fa-location-dot icon text-red-500"></i><span id="ciudad-texto"></span>
+                        </h2>
+                        <p id="fecha" class="text-gray-500">
+                            <i class="far fa-calendar-alt icon"></i><span id="fecha-texto"></span>
+                        </p>
+                        <p id="hora-local" class="text-gray-500 mt-1 font-medium">
+                            <i class="far fa-clock icon"></i><span id="hora-texto"></span>
+                        </p>
+                    </div>
+                    <div class="text-right">
+                        <div id="temperatura" class="text-4xl font-bold text-blue-600">
+                            <i id="clima-icon" class="fas fa-sun clima-icon clima-icon-sol"></i>
+                            <span id="temp-texto"></span>
+                        </div>
+                        <p id="sensacion" class="text-gray-600">
+                            <i class="fas fa-temperature-half icon text-red-400"></i><span id="sensacion-texto"></span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-4">
+                    <h3 class="text-lg font-semibold mb-3">
+                        <i class="fas fa-clock-rotate-left icon text-blue-600"></i>Pronóstico de hoy por horas
+                    </h3>
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper" id="pronostico-horas">
+                            <!-- Los slides del pronóstico se generarán con JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="error" class="max-w-md mx-auto mt-4 hidden">
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded animate__animated animate__shakeX" role="alert">
+                <i class="fas fa-circle-exclamation mr-2"></i>
+                <p id="error-mensaje" class="inline"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
